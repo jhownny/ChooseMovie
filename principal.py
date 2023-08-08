@@ -4,7 +4,7 @@ import pandas as pd
 from arquivos import *
 from dados import *
 
-path = "arquivos\Filmes.csv"
+path = "arquivos/Filmes.csv"
 
 if not ArqExiste(path):
     CriarArq(path)
