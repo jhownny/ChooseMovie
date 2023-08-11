@@ -1,4 +1,4 @@
-
+from persona import *
 
 def ArqExiste(nome):
     
@@ -104,3 +104,5 @@ def cadastrar(arq, nome='desconhecido', idade= 0):
         else:
             print(f'Novo registro de {nome} adicionado.\n')
             a.close()
+
+            

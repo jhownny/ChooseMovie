@@ -1,4 +1,5 @@
 insert into cinema values
+
 (default,'1960', 'The Great Escape'),
 (default,'1960', 'What Ever Happened to Baby Jane?'),
 (default,'1960', 'For a Few Dollars More'),

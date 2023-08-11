@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 import random
 import csv
-import pandas as pd
 from arquivos import *
 from dados import *
 

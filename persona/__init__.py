@@ -125,3 +125,5 @@ def LetraCor(texto, cor, est):
 def linhazinha():
 
     print('-' * 30) 
+
+    

@@ -10,6 +10,7 @@ def InserirFilmes(con,ano,filme):
     cursor.close()
     con.commit()
 
+
 def MostrarFilmes(con):
     cursor = con.cursor()
     sql = "SELECT id, ano, filme FROM biblioteca"
@@ -20,14 +21,17 @@ def MostrarFilmes(con):
     
     cursor.close()
 
+
 def main():
-    con = CriarConexao("127.0.0.1", "root", "", "cinema",)
+    con = CriarConexao("127.0.0.1", "root", "", "cinema")
     
     #InserirFilmes(con, "2022", "Tudo em Todo Lugar ao Mesmo Tempo")
     MostrarFilmes(con)
     
     FecharConexao(con)
 
+
+main()
 #with open('arquivos/Filmes.csv','r') as arquivo:
 #    leitor = csv.reader(arquivo)
 #    ano = list(leitor)
