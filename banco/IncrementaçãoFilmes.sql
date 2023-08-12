@@ -46,3 +46,4 @@ insert into cinema values
 (default,'2000', 'Get Out');
 
 select * from cinema;
+delete from cinema where id = '43';
