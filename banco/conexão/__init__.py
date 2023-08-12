@@ -9,5 +9,6 @@ def CriarConexao(host, usuario,senha,banco):
         return conectado
     
     
+    
 def FecharConexao(con):
     con.close()

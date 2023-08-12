@@ -1,5 +1,6 @@
 from persona import *
 
+
 def ArqExiste(nome):
     
     """
