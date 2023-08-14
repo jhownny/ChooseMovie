@@ -11,7 +11,7 @@ O foco do projeto `ChooseMovie` é fazer a busca dos elementos de fontes externa
 
 
 <div align='center'>
-	<h2>Pacotes</h2>
+	 <h2>&#128193;Pacotes&#128194;</h2> 
 </div>
 
 Exportei alguns pacotes para meu projeto, para funcionamento de funções do proprio projeto, 
@@ -25,4 +25,19 @@ Usado no projeto para conexão e implementação do banco MySQL. <br>
 [`Pandas`](https://pypi.org/project/pandas/) <br>
 Usado no projeto para manipulacão dos arquivos. <br>
 
+<div align='center'>
+	<h3>Instalação dos Pacotes</h3>
+</div>
 
+Para instalar os pacotes para funcionamento do codigo precisa-se de um instalador de pacotes do Python chamdo `Pip`. <br>
+Exemplo:
+
+	pip install pandas
+
+<br>
+<strong>
+	&#128226; A instalação vária com a IDE <i>(Integrated Development Environment ou Ambiente de Desenvolvimento Integrado)</i> utilizada, eu utilizo nesse projeto a IDE <i>VisualStudioCode.</i><br>
+</strong>
+<br> 
+
+Caso ocorra de não funcinar, verifique a documentação do proprio [`Pip`](https://pypi.org/project/pandas/).
