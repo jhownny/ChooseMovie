@@ -29,7 +29,7 @@ Usado no projeto para manipulacão dos arquivos. <br>
 	<h3>Instalação dos Pacotes</h3>
 </div>
 
-Para instalar os pacotes para funcionamento do codigo precisa-se de um instalador de pacotes do Python chamdo `Pip`. <br>
+Para instalar os pacotes para funcionamento do codigo precisa-se de um instalador de pacotes do Python chamado `Pip`. <br>
 Exemplo:
 
 	pip install pandas
