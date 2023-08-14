@@ -3,7 +3,7 @@ from mysql.connector import *
 def CriarConexao(host, usuario,senha,banco):
     try:
         conectado = connect(host=host, user=usuario, password=senha, database=banco) 
-    except:
+    except Error:
         print('Erro ao tentar se conectar')
     else:
         return conectado

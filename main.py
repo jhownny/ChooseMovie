@@ -29,14 +29,5 @@ def main():
     FecharConexao
 
 
-def ConexaoFinal():
-    try:
-        if __name__ == "__main__":
-            main()
-    except:
-        print("deu errado")
-    else:
-        for i in main:
-            print(list(i))
             
             
