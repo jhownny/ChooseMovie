@@ -18,11 +18,11 @@ Exportei alguns pacotes para meu projeto, para funcionamento de funções do pro
 leitura e escrita de arquivos, para ficar intuitivamente pratico e bonito e etc. <br>
 
 
-[`PySimpleGUI`](https://pypi.org/project/PySimpleGUI/) <br>
+[`PySimpleGUI`](https://github.com/PySimpleGUI/PySimpleGUI) <br>
 Usado no projeto para implementação de uma interface simplificada, com o objetivo de ser intuitivo e visualmente agradável. <br>
-[`mysql-connector-python`](https://pypi.org/project/mysql-connector-python/) <br>
+[`mysql-connector-python`](https://dev.mysql.com/doc/connector-python/en/connector-python-examples.html) <br>
 Usado no projeto para conexão e implementação do banco MySQL. <br>
-[`Pandas`](https://pypi.org/project/pandas/) <br>
+[`Pandas`](https://pandas.pydata.org/about/) <br>
 Usado no projeto para manipulacão dos arquivos. <br>
 
 <div align='center'>
@@ -40,4 +40,4 @@ Exemplo:
 </strong>
 <br> 
 
-Caso ocorra de não funcinar, verifique a documentação do proprio [`Pip`](https://pypi.org/project/pandas/).
+Caso ocorra de não funcinar, verifique a documentação do proprio [`Pip`](https://packaging.python.org/en/latest/tutorials/installing-packages/).
