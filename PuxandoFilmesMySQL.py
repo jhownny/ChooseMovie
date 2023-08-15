@@ -7,7 +7,7 @@ from dados import *
 from main import *
 from banco.conexão import *
 
-# Inserção de filmes
+##Inserção de filmes
 #con = CriarConexao("localhost", "root", "", "biblioteca")
 #cursor = con.cursor()
 #
@@ -38,17 +38,59 @@ from banco.conexão import *
 #    print('hfdighsauidfhi')
 #cursor.close()
 
-sg.theme('DarkAmber')   # Add a touch of color
+
+sg.theme('DarkBlue1')   # Add a touch of color
 # All the stuff inside your window.
-layout = [  [sg.Text('Digite o ano do filme: '), sg.InputText()],
-            [sg.Text('Digite o nome do filme: '), sg.InputText()],
-            [sg.Button('Ok'), sg.Button('Cancel')] ]
+layout = [  [sg.Text('Olá! Bem vindo ao meu Projeto ChooseMovie.')],
+            [sg.Text('Escolha oq deseja fazer clicando nos botões a baixo:')],
+            [sg.Button('Aleatorizar'), sg.Button('Inserir'), sg.Button('Sair')] ]
 
 # Create the Window
-window = sg.Window('ChooseMovie', layout)
+window = sg.Window('ChoseMovie', layout)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+    if event == sg.WIN_CLOSED or event == 'Sair': # if user closes window or clicks cancel
         break
-    print('You entered: ', values[0], 'and' , values[1])
+    
+    #if event == 'Aleatorizar':
+    
+    if event == 'Inserir':
+        
+        sg.theme('DarkBlue1')   # Add a touch of color
+        # All the stuff inside your window.
+        layout = [  [sg.Text('Ano do Filme:  ', size=(13,1)), sg.InputText()],
+                    [sg.Text('Nome do Filme: ', size=(13,1)), sg.InputText()],
+                    [sg.Button('Adicionar'), sg.Button('Cancelar/Sair')] ]
+
+        # Create the Window
+        window = sg.Window('ChooseMovie', layout)
+        # Event Loop to process "events" and get the "values" of the inputs
+        while True:
+            event, values = window.read()
+            
+            if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+                break
+            
+            if event == 'Adicionar':
+                #Inserção de filmes
+                con = CriarConexao("localhost", "root", "", "biblioteca")
+                cursor = con.cursor()
+
+                ano = values[0]
+                filme = values[1]
+
+                InserirFilme(con, ano, filme)
+
+                FecharConexao
+
+                sg.popup('O ano e filme inseridos foi: ', values[1], 'de', values[0])
+                print('O Ano e Filme inseridos foi: Filme', values[1], 'de' , values[0])
+                break
+
+window.close()
+
+#_____________________________________________________________________________________________________________
+
+
+    
