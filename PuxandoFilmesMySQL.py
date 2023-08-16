@@ -1,7 +1,5 @@
 import PySimpleGUI as sg
 import random
-import pandas as pd
-import csv
 from arquivos import *
 from dados import *
 from main import *
@@ -53,8 +51,19 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Sair': # if user closes window or clicks cancel
         break
     
-    #if event == 'Aleatorizar':
-    
+    if event == 'Aleatorizar':
+        cursor = con.cursor()
+        sql = "SELECT id,ano,filme FROM cinema"
+        cursor.execute(sql)
+        ident = random.randrange(id)
+        for (ident,ano,filme)in cursor:
+            print(f'O ano eo filme: {id,ano,filme}')
+        
+        cursor.close()
+        
+
+            
+
     if event == 'Inserir':
         
         sg.theme('DarkBlue1')   # Add a touch of color
