@@ -15,7 +15,7 @@ O foco do projeto `ChooseMovie` é fazer a busca dos elementos de fontes externa
 </div>
 
 Exportei alguns pacotes para meu projeto, para funcionamento de funções do proprio projeto, 
-leitura e escrita de arquivos, para ficar intuitivamente pratico e bonito e etc. <br>
+leitura e escrita de arquivos, para ficar intuitivamente prático, bonito e etc. <br>
 
 
 [`PySimpleGUI`](https://github.com/PySimpleGUI/PySimpleGUI) <br>
