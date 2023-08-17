@@ -2,106 +2,87 @@ import PySimpleGUI as sg
 import random
 from arquivos import *
 from dados import *
-from main import *
+from banco.DataFunctions import *
 from banco.conexão import *
-
-##Inserção de filmes
-#con = CriarConexao("localhost", "root", "", "biblioteca")
-#cursor = con.cursor()
-#
-#ano = input('Digite o ano do filme: ')
-#filme = input('Digite o nome do filme: ')
-#
-#InserirFilme(con, ano, filme)
-#MostrarFilmes(con)
-#
-#FecharConexao
-#
-#con = CriarConexao("localhost", "root", "", "biblioteca")
-#cursor = con.cursor()
-#sql = "SELECT id,ano,filme FROM cinema"
-#cursor.execute(sql)
-#    
-#for (id,ano,filme)in cursor:
-#    print(id,ano,filme)
-#    
-#cursor.close()
-#
-#
-#con = CriarConexao("localhost", "root", "", "biblioteca")
-#cursor = con.cursor()
-#sql = "SELECT id,ano,filme FROM cinema"
-#cursor.execute(sql)
-#for (ano,filme)in cursor:
-#    print('hfdighsauidfhi')
-#cursor.close()
 
 d = dict()
 
-sg.theme('DarkBlue1')   # Add a touch of color
-# All the stuff inside your window.
+sg.theme('DarkBlue1')   # Tema da Janela
+
+# O codigo da Interface dentro da Janela.
 layout = [  [sg.Text('Olá! Bem vindo ao meu Projeto ChooseMovie.')],
             [sg.Text('Escolha o que deseja fazer clicando nos botões a baixo:')],
             [sg.Txt( key='-OUTPUT-')  ],
             [sg.Button('Aleatorizar'), sg.Button('Inserir'), sg.Button('Sair')] ]
 
-# Create the Window
-window = sg.Window('ChoseMovie', layout)
-# Event Loop to process "events" and get the "values" of the inputs
+# Criação da Janela
+window = sg.Window('ChoseMovieMain', layout)
+
+# Evento de Loop para processar "events" e pega os "values" das colocações.
 while True:
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Sair': # if user closes window or clicks cancel
+    if event == sg.WIN_CLOSED or event == 'Sair': # Se o usuario fechar a Janela ou clicar em cancelar.
         break
     
-    elif event == 'Aleatorizar':
+    elif event == 'Aleatorizar': # Se o usuario Clicar no botão "Aleatorizar".
+
+        # Fazendo conexão com o banco.
         con = CriarConexao("localhost", "root", "", "biblioteca")
         cursor = con.cursor()
         sql = "SELECT id,ano,filme FROM cinema"
         cursor.execute(sql)
         
-        
+        # Faz o id virar chave e ano e filme um item de um dicionario.
         for (id,ano,filme) in cursor:
             d[id] = ano, filme
 
-        tam = len(d.keys())
-
         try:
-
+            # Aleatoriza os itens como de acordo com o id
             ident = random.choice(list(d.items()))
+
+            # Seleciona somente os itens
             af = ident[1]
+            # Separa o primeiro item declarando-o como "ano"
             ano = af[0]
+            # Separa o segundo item declarando-o como "filme"
             filme = af[1] 
+
         except:
             window['-OUTPUT-'].update('ERRO')
             continue
+        # Caso de sucesso retornará os valores como de acordo.
         window['-OUTPUT-'].update(f'O ano de lançamento é {ano} o filme escolhido foi {filme}.')
                  
             
-    elif event == 'Inserir':
+    elif event == 'Inserir': # Se o usuario Clicar no botão "Inserir".
         
-        sg.theme('DarkBlue1')   # Add a touch of color
-        # All the stuff inside your window.
+        sg.theme('DarkBlue1')
+
+        # Caixas de texto para colocar o ano e o filme respectivamente. 
         layout = [  [sg.Text('Ano do Filme:  ', size=(13,1)), sg.InputText()],
                     [sg.Text('Nome do Filme: ', size=(13,1)), sg.InputText()],
                     [sg.Button('Adicionar'), sg.Button('Cancelar')] ]
 
-        # Create the Window
-        window = sg.Window('ChooseMovie', layout)
-        # Event Loop to process "events" and get the "values" of the inputs
+        
+        window = sg.Window('ChooseMovieInserir', layout)
+        
         while True:
             
             event, values = window.read()
-            if event == sg.WIN_CLOSED : # if user closes window
+            if event == sg.WIN_CLOSED :
                 break
             
             elif event == 'Cancelar':   
                 window.close()
+
+            #Inserção de filmes    
+            elif event == 'Adicionar': # Se o usuario Clicar no botão "Adicionar".
                 
-            elif event == 'Adicionar':
-                #Inserção de filmes
+                # Conexão com o banco
                 con = CriarConexao("localhost", "root", "", "biblioteca")
                 cursor = con.cursor()
 
+                #Associando os valores adicionados as caixas de texto as variaveis.
                 ano = values[0]
                 filme = values[1]
 

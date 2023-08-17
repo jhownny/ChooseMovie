@@ -1,6 +1,19 @@
 from mysql.connector import *
 
 def CriarConexao(host, usuario,senha,banco):
+
+    """
+    CriarConexao → Conecta ao banco de dados.
+    
+    Parâmetros:
+        - Host, usuario, senha, database.
+        
+    Retorna:
+        - Retornara sucesso à conexão.
+        - Retornara uma mensagem de erro caso os parametros não esteja atendidos.
+
+    """
+    
     try:
         conectado = connect(host=host, user=usuario, password=senha, database=banco) 
     except Error:
@@ -11,4 +24,17 @@ def CriarConexao(host, usuario,senha,banco):
     
     
 def FecharConexao(con):
+
+    """
+    FecharConexao → Fecha conexão com o banco de dados.
+    
+    Parâmetros:
+        - Conexão.
+        
+    Retorna:
+        - Retornará o fechamento do banco.
+        - Não retornará nada.
+
+    """
+
     con.close()
