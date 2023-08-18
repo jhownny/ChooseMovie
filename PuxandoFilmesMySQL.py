@@ -3,7 +3,7 @@ import random
 from arquivos import *
 from dados import *
 from banco.DataFunctions import *
-from banco.conexão import *
+import banco.conexão
 
 d = dict()
 
@@ -95,8 +95,6 @@ while True:
                 window.close()
                 
 window.close()
-
-#_____________________________________________________________________________________________________________
 
 
     

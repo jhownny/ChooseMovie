@@ -1,4 +1,4 @@
-from conexão import *
+from banco.conexão import *
 
 def InserirFilme(con, ano, filme):
 
