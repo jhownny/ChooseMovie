@@ -10,7 +10,7 @@ def CriarConexao(host, usuario,senha,banco):
         
     Retorna:
         - Retornara sucesso à conexão.
-        - Retornara uma mensagem de erro caso os parametros não esteja atendidos.
+        - Retornara uma mensagem de erro caso os parametros não sejam atendidos.
 
     """
     
