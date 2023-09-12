@@ -1,5 +1,6 @@
 from persona import *
-
+import csv
+import random
 
 def ArqExiste(nome):
     
@@ -107,3 +108,31 @@ def cadastrar(arq, nome='desconhecido', idade= 0):
             a.close()
 
             
+# Função para carregar os dados do arquivo CSV para um dicionário
+def carregar_filmes(filename):
+    filmes = {}
+    try:
+        with open(filename, newline='', encoding='utf-8') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                ano, filme = row
+                filmes[ano] = filme
+    except FileNotFoundError:
+        pass
+    return filmes
+
+# Função para salvar os dados do dicionário em um arquivo CSV
+def salvar_filmes(filename, filmes):
+    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        for ano, filme in sorted(filmes.items()):
+            writer.writerow([ano, filme])
+
+# Função para escolher aleatoriamente um filme e ano
+def escolher_aleatoriamente(filmes):
+    if filmes:
+        ano, filme = random.choice(list(filmes.items()))
+        return f'Ano: {ano}, Filme: {filme}'
+    else:
+        return 'Não há filmes registrados.'    
+        

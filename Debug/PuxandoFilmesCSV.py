@@ -1,76 +1,124 @@
+from arquivos import *
+from weakref import finalize
 import PySimpleGUI as sg
 import random
 import pandas as pd
 import csv
-#from arquivos import *
-#from dados import *
+ 
 
 
 
+# Layout da interface gráfica
+layout = [
+    [sg.Text('Ano:'), sg.InputText(key='ano')],
+    [sg.Text('Filme:'), sg.InputText(key='filme')],
+    [sg.Button('Adicionar'), sg.Button('Escolher Aleatoriamente'), sg.Button('Sair')],
+    [sg.Text('Lista de Filmes:')],
+    [sg.Listbox(values=[], size=(40, 10), key='filmes')],
+]
 
-# Nome do arquivo CSV
-nome_arquivo = 'arquivos/Filmes.csv'
+# Criação da janela
+window = sg.Window('Organizador de Filmes', layout)
 
-# Função para ler os filmes do arquivo CSV e retornar um dicionário de anos e filmes
-def ler_filmes():
-    try:
-        with open(nome_arquivo, 'r', newline='') as arquivo_csv:
-            leitor_csv = csv.DictReader(arquivo_csv)
-            filmes = {row['Ano']: row['Filmes'].split(', ') for row in leitor_csv}
-    except FileNotFoundError:
-        filmes = {}
-    return filmes
+# Carregar filmes existentes
+filename = 'arquivos/Filmes.csv'
+filmes = carregar_filmes(filename)
+filmes_list = [f'{ano}: {filme}' for ano, filme in filmes.items()]
+window['filmes'].update(filmes_list)
 
-# Função para adicionar (ano e filme) à lista existente de filmes
-def adicionar_filme(filmes):
-    novo_ano = input("Digite o ano do filme: ")
-    novo_filme = input("Digite o nome do filme: ")
+# Loop principal
+while True:
+    event, values = window.read()
 
-    # Verifique se o ano já existe nas chaves do dicionário de filmes
-    if novo_ano in filmes:
-        if novo_filme not in filmes[novo_ano]:
-            filmes[novo_ano].append(novo_filme)
-            print(f"Filme '{novo_filme}' do ano {novo_ano} adicionado à lista de filmes.")
-        else:
-            print(f"O filme '{novo_filme}' do ano {novo_ano} já existe na lista de filmes.")
-    else:
-        filmes[novo_ano] = [novo_filme]
-        print(f"Filme '{novo_filme}' do ano {novo_ano} adicionado à lista de filmes.")
+    if event == sg.WIN_CLOSED or event == 'Sair':
+        break
 
-# Função para salvar a lista de filmes ordenada em um arquivo CSV
-def salvar_filmes(filmes):
-    with open(nome_arquivo, 'w', newline='') as arquivo_csv:
-        escritor_csv = csv.writer(arquivo_csv)
-        escritor_csv.writerow(['Ano', 'Filmes'])
-        for ano, lista_filmes in sorted(filmes.items(), key=lambda x: int(x[0])):
-            escritor_csv.writerow([ano, ', '.join(lista_filmes)])
-        print("Filmes salvos no arquivo CSV.")
+    if event == 'Adicionar':
+        ano = values['ano']
+        filme = values['filme']
+        if ano and filme:
+            if ano not in filmes:
+                filmes[ano] = filme
+                filmes_list.append(f'{ano}: {filme}')
+                window['filmes'].update(filmes_list)
+                window['ano'].update('')
+                window['filme'].update('')
 
-# Função principal
-def main():
-    filmes = ler_filmes()
+    if event == 'Escolher Aleatoriamente':
+        escolha = escolher_aleatoriamente(filmes)
+        sg.popup('Escolha Aleatória', escolha)
 
-    while True:
-        print("\nMenu:")
-        print("1. Adicionar um novo filme")
-        print("2. Exibir filmes por ano")
-        print("3. Sair")
+# Salvar filmes no arquivo CSV
+salvar_filmes(filename, filmes)
 
-        opcao = input("Escolha uma opção: ")
+# Fechar a janela
+window.close()
 
-        if opcao == '1':
-            adicionar_filme(filmes)
-        elif opcao == '2':
-            for ano, lista_filmes in sorted(filmes.items(), key=lambda x: int(x[0])):
-                print(f"Ano: {ano}, Filmes: {', '.join(lista_filmes)}")
-        elif opcao == '3':
-            salvar_filmes(filmes)
-            break
-        else:
-            print("Opção inválida. Escolha novamente.")
 
-if __name__ == "__main__":
-    main()
+
+## Nome do arquivo CSV
+#nome_arquivo = 'arquivos/Filmes.csv'
+#
+## Função para ler os filmes do arquivo CSV e retornar um dicionário de anos e filmes
+#def ler_filmes():
+#    try:
+#        with open(nome_arquivo, 'r', newline='') as arquivo_csv:
+#            leitor_csv = csv.DictReader(arquivo_csv)
+#            filmes = {row['Ano']: row['Filmes'].split(', ') for row in leitor_csv}
+#    except FileNotFoundError:
+#        filmes = {}
+#    return filmes
+#
+## Função para adicionar (ano e filme) à lista existente de filmes
+#def adicionar_filme(filmes):
+#    novo_ano = input("Digite o ano do filme: ")
+#    novo_filme = input("Digite o nome do filme: ")
+#
+#    # Verifique se o ano já existe nas chaves do dicionário de filmes
+#    if novo_ano in filmes:
+#        if novo_filme not in filmes[novo_ano]:
+#            filmes[novo_ano].append(novo_filme)
+#            print(f"Filme '{novo_filme}' do ano {novo_ano} adicionado à lista de filmes.")
+#        else:
+#            print(f"O filme '{novo_filme}' do ano {novo_ano} já existe na lista de filmes.")
+#    else:
+#        filmes[novo_ano] = [novo_filme]
+#        print(f"Filme '{novo_filme}' do ano {novo_ano} adicionado à lista de filmes.")
+#
+## Função para salvar a lista de filmes ordenada em um arquivo CSV
+#def salvar_filmes(filmes):
+#    with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+#        escritor_csv = csv.writer(arquivo_csv)
+#        escritor_csv.writerow(['Ano', 'Filmes'])
+#        for ano, lista_filmes in sorted(filmes.items(), key=lambda x: int(x[0])):
+#            escritor_csv.writerow([ano, ', '.join(lista_filmes)])
+#        print("Filmes salvos no arquivo CSV.")
+#
+## Função principal
+#def main():
+#    filmes = ler_filmes()
+#
+#    while True:
+#        print("\nMenu:")
+#        print("1. Adicionar um novo filme")
+#        print("2. Exibir filmes por ano")
+#        print("3. Sair")
+#
+#        opcao = input("Escolha uma opção: ")
+#
+#        if opcao == '1':
+#            adicionar_filme(filmes)
+#        elif opcao == '2':
+#            for ano, lista_filmes in sorted(filmes.items(), key=lambda x: int(x[0])):
+#                print(f"Ano: {ano}, Filmes: {', '.join(lista_filmes)}")
+#        elif opcao == '3':
+#            salvar_filmes(filmes)
+#            break
+#        else:
+#            print("Opção inválida. Escolha novamente.")
+#
+#if __name__ == "__main__":
+#    main()
 
 
 
