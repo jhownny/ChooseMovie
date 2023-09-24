@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import random
 from arquivos import *
 from dados import *
-from banco.DataFunctions import *
+import banco.DataFunctions
 import banco.conexão
 
 
@@ -30,7 +30,7 @@ while True:
     elif event == 'Aleatorizar': # Se o usuario Clicar no botão "Aleatorizar".
 
         # Fazendo conexão com o banco.
-        con = CriarConexao("localhost", "root", "", "biblioteca")
+        con = banco.conexão.CriarConexao("localhost", "root", "", "biblioteca")
         cursor = con.cursor()
         sql = "SELECT id,ano,filme FROM cinema"
         cursor.execute(sql)
@@ -76,13 +76,13 @@ while True:
             elif event == 'Adicionar': # Se o usuario Clicar no botão "Adicionar".
                 
                 # Conexão com o banco
-                con = CriarConexao("localhost", "root", "", "biblioteca")
+                con = banco.conexão.CriarConexao("localhost", "root", "", "biblioteca")
                 cursor = con.cursor()
                 #Associando os valores adicionados as caixas de texto as variaveis.
                 ano = values[0]
                 filme = values[1]
-                InserirFilme(con, ano, filme)
-                FecharConexao
+                banco.DataFunctions.InserirFilme(con, ano, filme)
+                banco.DataFunctions.FecharConexao
                 sg.popup('O ano e filme inseridos foi: ', values[1], 'de', values[0])
                 print('O Ano e Filme inseridos foi: Filme', values[1], 'de' , values[0])
         window.close()

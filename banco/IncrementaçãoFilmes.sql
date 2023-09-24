@@ -38,7 +38,7 @@ insert into cinema values
 
 (default,'2000', 'Office Space'),
 (default,'2000', 'No Country for Old Men'),
-(default,'2000', 'Watchmen'),
+(default,'2000', 'Watchmen'),cinema
 (default,'2000', 'Who Am I'),
 (default,'2000', 'The Conjuring'),
 (default,'2000', 'Into the Wild'),
@@ -46,4 +46,7 @@ insert into cinema values
 (default,'2000', 'Get Out');
 
 select * from cinema;
-delete from cinema where id = '43';
+
+/*Funções de delete*/
+delete from cinema where id = '44';
+delete from  cinema where id > 40;
