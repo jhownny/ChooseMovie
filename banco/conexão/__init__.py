@@ -1,4 +1,4 @@
-from mysql.connector import *
+import mysql.connector
 
 def CriarConexao(host, usuario,senha,banco):
 
@@ -15,8 +15,8 @@ def CriarConexao(host, usuario,senha,banco):
     """
     
     try:
-        conectado = connect(host=host, user=usuario, password=senha, database=banco) 
-    except Error:
+        conectado = mysql.connector.connect(host=host, user=usuario, password=senha, database=banco) 
+    except mysql.connector.Error:
         print('Erro ao tentar se conectar')
     else:
         return conectado
