@@ -1,3 +1,4 @@
+--inserção do conteúdo da tabela--
 insert into cinema values
 
 (default,'1960', 'The Great Escape'),
@@ -38,13 +39,14 @@ insert into cinema values
 
 (default,'2000', 'Office Space'),
 (default,'2000', 'No Country for Old Men'),
-(default,'2000', 'Watchmen'),cinema
+(default,'2000', 'Watchmen'),
 (default,'2000', 'Who Am I'),
 (default,'2000', 'The Conjuring'),
 (default,'2000', 'Into the Wild'),
 (default,'2000', 'The Imitation Game'),
 (default,'2000', 'Get Out');
 
+/*seleção da tabela cinema para visualização*/
 select * from cinema;
 
 /*Funções de delete*/
